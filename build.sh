@@ -11,7 +11,7 @@ crave set --projectID 36
 crave run --no-patch -- "rm -rf .repo/local_manifests && \
 
 # Clone local_manifests repository
-git clone https://github.com/lion-development/local_manifests.git .repo/local_manifests -b lineage-20 ;\
+git clone https://github.com/IMYdev/local_manifest.git .repo/local_manifests -b main ;\
 
 # Removals
 
