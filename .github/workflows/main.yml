@@ -19,7 +19,14 @@ jobs:
       continue-on-error: true
       # Check-out in order to access the repository's files.
     - name: Check-out to repository
-      uses: actions/checkout@v4      
+      uses: actions/checkout@v4    
+    - name: Test Local Manifests
+      run: |
+        repo init -u https://github.com/LineageOS/android.git -b lineage-20.0 --git-lfs --depth=1
+        git clone https://github.com/IMYdev/local_manifest.git --depth 1 -b main .repo/local_manifests && \
+        timeout 1m repo sync --force-sync || { exit_code=$?; [ $exit_code -eq 124 ] || (echo "Error: Process failed with exit code $exit_code"; exit $exit_code); }
+        rm -rf .repo
+      timeout-minutes: 10      
     - name: Exports
       run: |
         export BUILD_HOSTNAME=crave
