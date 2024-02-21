@@ -2,51 +2,40 @@
 
 set -e
 
-# Set Crave to build using LineageOS 21 as base
-repo init -u https://github.com/LineageOS/android.git -b lineage-21.0 --git-lfs
-crave set --projectID 72
+# Set Crave to build using LineageOS 20 as base
+repo init -u https://github.com/LineageOS/android.git -b lineage-20.0 --git-lfs
+crave set --projectID 36
 
 # Run inside foss.crave.io devspace, in the project folder
 # Remove existing local_manifests
 crave run --no-patch -- "rm -rf .repo/local_manifests && \
-# Initialize repo with specified manifest
-repo init -u https://github.com/RisingTechOSS/android -b fourteen --git-lfs ;\
 
 # Clone local_manifests repository
-git clone https://github.com/OkBuddyGSI/treble_manifest.git .repo/local_manifests -b 14 ;\
+git clone https://github.com/lion-development/local_manifests.git .repo/local_manifests -b lineage-20 ;\
 
 # Removals
-rm -rf system/libhidl prebuilts/clang/host/linux-x86 prebuilt/*/webview.apk platform/external/python/pyfakefs platform/external/python/bumble external/chromium-webview/prebuilt/x86_64 platform/external/opencensus-java RisingOS_gsi patches device/phh/treble && \
+# rm -rf system/libhidl prebuilts/clang/host/linux-x86 prebuilt/*/webview.apk platform/external/python/pyfakefs platform/external/python/bumble external/chromium-webview/prebuilt/x86_64 platform/external/opencensus-java RisingOS_gsi patches device/phh/treble && \
 
 # Sync the repositories
 repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags && \ 
 
-# Clone our GSI Repo
-git clone https://github.com/OkBuddyGSI/RisingOS_gsi -b 14 && \
-mv RisingOS_gsi/patches patches; \
-mv RisingOS_gsi/patches/RisingOS.mk device/phh/treble; \
-
-# Apply Patches
-bash patches/apply-patches.sh . && \
-
 # Set up build environment
-cd device/phh/treble
-bash generate.sh RisingOS+GApps && \
-cd ../../.. && \
 source build/envsetup.sh && \
 
 # Lunch configuration
-lunch treble_arm64_bgN-userdebug ;\
+lunch lineage_X6816-userdebug ;\
 
+# Start Build
 croot ;\
-make systemimage ; \
+m installclean; \
+mka bacon ; \
 echo "Date and time:" ; \
 
 # Print out/build_date.txt
 cat out/build_date.txt; \
 
 # Print SHA256
-sha256sum out/target/product/*/*.img"
+sha256sum out/target/product/*/*.zip"
 
 # Clean up
 # rm -rf tissot/*
@@ -55,7 +44,7 @@ sha256sum out/target/product/*/*.img"
 # crave pull out/target/product/*/*.zip 
 
 # Pull generated img files
-crave pull out/target/product/*/*.img
+crave pull out/target/product/*/*.zip
 
 # Upload zips to Telegram
 # telegram-upload --to sdreleases tissot/*.zip

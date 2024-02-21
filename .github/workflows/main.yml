@@ -12,10 +12,10 @@ jobs:
     - name: Cleanup
       run: rm -rf *
     - name: Create workspace
-      run: mkdir gsi
+      run: mkdir lion
       continue-on-error: true
     - name: Enter Workspace
-      run: cd gsi 
+      run: cd lion 
       continue-on-error: true
       # Check-out in order to access the repository's files.
     - name: Check-out to repository
@@ -23,7 +23,7 @@ jobs:
     - name: Exports
       run: |
         export BUILD_HOSTNAME=crave
-        export BUILD_USERNAME=OkBuddyGSI
+        export BUILD_USERNAME=lion-development
     - name: Run Script
       run: bash build.sh
       # Only reach this when the user killed the workflow.
@@ -32,17 +32,15 @@ jobs:
       run: crave stop --all
     - name: Find output file
       run: |
-        mv */system.img RisingOS-Generic-$(date +%Y%m%d)-OkBuddyGSI-EXPERIMENTATIONS.img
-        mv system.img RisingOS-Generic-$(date +%Y%m%d)-OkBuddyGSI-EXPERIMENTATIONS.img
-        xz -z -k RisingOS*.img
+        mv */*.zip .
     - name: Upload to Release
       uses: softprops/action-gh-release@v1
       with:
         files: | 
-          *.img.xz
-        name: RisingOS-${{ github.run_id }}
+          *.zip
+        name: LineageOS-20-${{ github.run_id }}
         tag_name: ${{ github.run_id }}
         body: |
-          Target: RisingOS-Generic
+          Target: lion
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
