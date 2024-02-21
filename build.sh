@@ -14,7 +14,6 @@ crave run --no-patch -- "rm -rf .repo/local_manifests && \
 git clone https://github.com/lion-development/local_manifests.git .repo/local_manifests -b lineage-20 ;\
 
 # Removals
-# rm -rf system/libhidl prebuilts/clang/host/linux-x86 prebuilt/*/webview.apk platform/external/python/pyfakefs platform/external/python/bumble external/chromium-webview/prebuilt/x86_64 platform/external/opencensus-java RisingOS_gsi patches device/phh/treble && \
 
 # Sync the repositories
 repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags && \ 

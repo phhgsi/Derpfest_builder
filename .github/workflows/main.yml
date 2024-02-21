@@ -1,10 +1,10 @@
-name: RisingOS GSI
+name: LineageOS Builder
 
 on:
   workflow_dispatch:
 jobs:
   test:
-    name: Build GSIs using foss.crave.io
+    name: Build LineageOS using foss.crave.io
 
     runs-on: self-hosted
 
