@@ -1,2 +1,2 @@
 # android_build_scripts
-Scripts to build LineageOS using foss.crave.io
+Scripts to build Derpfest using foss.crave.io
