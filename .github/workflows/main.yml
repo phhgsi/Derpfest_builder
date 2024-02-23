@@ -22,7 +22,7 @@ jobs:
       uses: actions/checkout@v4    
     - name: Test Local Manifests
       run: |
-        repo init -u https://github.com/LineageOS/android.git -b lineage-20.0 --git-lfs --depth=1
+        repo init -u https://github.com/DerpFest-AOSP/manifest.git -b 14 --depth=1
         git clone https://github.com/IMYdev/local_manifest.git --depth 1 -b main .repo/local_manifests && \
         timeout 1m repo sync --force-sync || { exit_code=$?; [ $exit_code -eq 124 ] || (echo "Error: Process failed with exit code $exit_code"; exit $exit_code); }
         rm -rf .repo
@@ -30,7 +30,7 @@ jobs:
     - name: Exports
       run: |
         export BUILD_HOSTNAME=crave
-        export BUILD_USERNAME=lion-development
+        export BUILD_USERNAME=phhgsi
     - name: Run Script
       run: bash build.sh
       # Only reach this when the user killed the workflow.
