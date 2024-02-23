@@ -3,7 +3,7 @@
 set -e
 
 # Set Crave to build using LineageOS 20 as base
-repo init -u https://github.com/LineageOS/android.git -b lineage-20.0 --git-lfs
+repo init -u https://github.com/DerpFest-AOSP/manifest.git -b 14
 crave set --projectID 36
 
 # Run inside foss.crave.io devspace, in the project folder
@@ -22,7 +22,7 @@ repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags && \
 source build/envsetup.sh && \
 
 # Lunch configuration
-lunch lineage_X6816-userdebug ;\
+lunch derp_oscar-userdebug ;\
 
 # Start Build
 croot ;\
