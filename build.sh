@@ -11,18 +11,19 @@ crave set --projectID 36
 crave run --no-patch -- "rm -rf .repo/local_manifests && \
 
 # Clone local_manifests repository
-git clone https://github.com/IMYdev/local_manifest.git .repo/local_manifests -b main ;\
+git clone https://github.com/phhhsi/local_manifest.git .repo/local_manifests -b main ;\
 
 # Removals
 
 # Sync the repositories
 repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags && \ 
+rm -rf hardware/google/pixel/kernel_headers && \
 
 # Set up build environment
 source build/envsetup.sh && \
 
 # Lunch configuration
-lunch derp_oscar-userdebug ;\
+lunch derp_oscar-eng ;\
 
 # Start Build
 croot ;\
