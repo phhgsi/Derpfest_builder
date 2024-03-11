@@ -2,6 +2,12 @@
 
 set -e
 
+# Update repo tool
+mkdir -p ~/.bin
+curl https://storage.googleapis.com/git-repo-downloads/repo-2.42 > ~/.bin/repo
+chmod +x ~/.bin/repo
+export PATH=~/.bin:$PATH
+
 # Set Crave to build using LineageOS 20 as base
 repo init -u https://github.com/DerpFest-AOSP/manifest.git -b 14
 crave set --projectID 36
