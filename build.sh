@@ -2,11 +2,12 @@
 
 set -e
 
-# Update repo tool
+# Update repo tool from mirror
 mkdir -p ~/.bin
-wget https://storage.googleapis.com/git-repo-downloads/repo-2.42 -O ~/.bin/repo
+wget https://mirrors.tuna.tsinghua.edu.cn/git/git-repo -O ~/.bin/repo
 chmod +x ~/.bin/repo
 export PATH=~/.bin:$PATH
+
 
 
 # Set Crave to build using LineageOS 20 as base
