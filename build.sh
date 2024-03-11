@@ -11,7 +11,7 @@ crave set --projectID 36
 crave run --no-patch -- "rm -rf .repo/local_manifests && \
 
 # Clone local_manifests repository
-git clone https://github.com/phhhsi/local_manifest.git .repo/local_manifests -b main ;\
+git clone https://github.com/phhgsi/local_manifest.git .repo/local_manifests -b main ;\
 
 # Removals
 
